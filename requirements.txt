@@ -5,5 +5,5 @@ Pillow==10.4.0
 opencv-python-headless==4.10.0.84
 ultralytics==8.2.93
 dill==0.3.8
-cv2
+
 
