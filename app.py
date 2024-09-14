@@ -2,11 +2,10 @@ import streamlit as st
 import torch
 from PIL import Image
 import numpy as np
-import cv2
 from ultralytics import YOLO
 
 # Load the model
-model = YOLO('best.pt')  # Use the relative path since the model is in the same directory
+model = YOLO('best.pt')  # Assuming the model is in the same directory
 
 st.title("YOLOv8 Object Detection Web App")
 
@@ -20,11 +19,11 @@ if uploaded_file is not None:
 
     # Prepare the image for prediction
     img_np = np.array(image)
-    img_tensor = torch.from_numpy(img_np).permute(2, 0, 1).float().unsqueeze(0) / 255.0
 
     # Perform inference
-    results = model.predict(img_tensor)
+    results = model.predict(img_np)
 
-    # Draw results
-    annotated_img = results[0].plot()
+    # Draw results (the ultralytics library handles plotting)
+    annotated_img = results[0].plot()  # Results are annotated by YOLOv8
     st.image(annotated_img, caption='Detected Objects', use_column_width=True)
+
